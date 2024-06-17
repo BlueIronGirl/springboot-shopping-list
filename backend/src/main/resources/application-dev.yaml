@@ -42,8 +42,8 @@ server:
 
 logging:
   level:
-    root: ${APP_LOGGING_ROOT:info}
-    de.shoppinglist: ${APP_LOGGING:debug}
+    root: ${APP_LOGGING_ROOT:error}
+    de.shoppinglist: ${APP_LOGGING:warn}
 
 management:
   endpoints:

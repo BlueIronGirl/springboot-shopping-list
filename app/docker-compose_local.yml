@@ -14,18 +14,14 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: test123
       MYSQL_DATABASE: shopping-list
-#      MARIADB_ROOT_PASSWORD: test123
-#      MARIADB_USER: root
-#      MARIADB_PASSWORD: test123
-#      MARIADB_DATABASE: shopping-list
     volumes:
       - database:/var/lib/mysql
       - ./dev/mariadb:/docker-entrypoint-initdb.d
 
   backend:
     build:
-      context: E:\dev\quellen\alicegithub\shopping-list-backend
-      dockerfile: E:\dev\quellen\alicegithub\shopping-list-backend\Dockerfile
+      context: ../backend
+      dockerfile: ../backend/Dockerfile
     restart: unless-stopped
     depends_on: [ db ]
     env_file: [ .env ]
@@ -35,8 +31,8 @@ services:
   frontend:
     depends_on: [ backend ]
     build:
-      context: E:\dev\quellen\alicegithub\shopping-list-frontend
-      dockerfile: E:\dev\quellen\alicegithub\shopping-list-frontend\Dockerfile
+      context: ../frontend
+      dockerfile: ../frontend/Dockerfile
     restart: unless-stopped
     env_file: [ .env ]
     ports:
