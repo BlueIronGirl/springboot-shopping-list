@@ -1,0 +1,16 @@
+.idea
+*.iml
+*.zip
+*.rar
+*.class
+
+#Ordner
+target
+javadoc
+out
+nbproject
+build
+Beispiele
+
+*.env
+!example.env
