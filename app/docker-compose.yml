@@ -1,0 +1,30 @@
+version: '3.8'
+
+volumes:
+  database:
+
+services:
+  db:
+    image: "mariadb:latest"
+    restart: unless-stopped
+    env_file: [ .env ]
+    #ports:
+    #  - "3306:3306"
+    volumes:
+      - database:/var/lib/mysql
+
+  backend:
+    image: "blueirongirl/shopping-list-backend"
+    restart: unless-stopped
+    depends_on: [ db ]
+    env_file: [ .env ]
+    #ports:
+    #  - "8080:8080"
+
+  frontend:
+    depends_on: [ backend ]
+    image: "blueirongirl/shopping-list-frontend"
+    restart: unless-stopped
+    env_file: [ .env ]
+    ports:
+      - "8080:80"

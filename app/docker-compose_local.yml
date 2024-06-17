@@ -1,0 +1,43 @@
+version: '3.8'
+
+volumes:
+  database:
+
+services:
+  db:
+    image: "mariadb:latest"
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: test123
+      MYSQL_USER: root
+      MYSQL_PASSWORD: test123
+      MYSQL_DATABASE: shopping-list
+#      MARIADB_ROOT_PASSWORD: test123
+#      MARIADB_USER: root
+#      MARIADB_PASSWORD: test123
+#      MARIADB_DATABASE: shopping-list
+    volumes:
+      - database:/var/lib/mysql
+      - ./dev/mariadb:/docker-entrypoint-initdb.d
+
+  backend:
+    build:
+      context: E:\dev\quellen\alicegithub\shopping-list-backend
+      dockerfile: E:\dev\quellen\alicegithub\shopping-list-backend\Dockerfile
+    restart: unless-stopped
+    depends_on: [ db ]
+    env_file: [ .env ]
+    #ports:
+    #  - "8080:8080"
+
+  frontend:
+    depends_on: [ backend ]
+    build:
+      context: E:\dev\quellen\alicegithub\shopping-list-frontend
+      dockerfile: E:\dev\quellen\alicegithub\shopping-list-frontend\Dockerfile
+    restart: unless-stopped
+    env_file: [ .env ]
+    ports:
+      - "8080:80"
