@@ -1,0 +1,41 @@
+<div class="card">
+  <p-table class="p-0"
+           [value]="artikels"
+           [paginator]="true"
+           [rows]="10"
+           [rowsPerPageOptions]="[5, 10, 15]"
+  >
+    <!-- Header -->
+    <ng-template pTemplate="header">
+      <tr>
+        <th pResizableColumn pSortableColumn="einkaufszettel.name" style="width: 30%">
+          Einkaufszettel
+          <p-sortIcon field="einkaufszettel.name"/>
+        </th>
+        <th pResizableColumn pSortableColumn="name" style="width: 30%">
+          Name
+          <p-sortIcon field="name"/>
+        </th>
+        <th pResizableColumn pSortableColumn="kaeufer" style="width: 20%">
+          Käufer
+          <p-sortIcon field="kaeufer"/>
+        </th>
+        <th pResizableColumn pSortableColumn="kaufZeitpunkt" style="width: 20%">
+          Kaufzeitpunkt
+          <p-sortIcon field="kaufZeitpunkt"/>
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-artikel>
+      <tr>
+        <td>{{ artikel.einkaufszettel.name }}</td>
+        <td><span class="text-lime-600">{{ artikel.anzahl }}</span> {{ artikel.name }}</td>
+        <td>{{ artikel.kaeufer?.name }}</td>
+        <td><span *ngIf="artikel.kaufZeitpunkt">{{ artikel.kaufZeitpunkt | date:'dd.MM.yyyy HH:mm' }}</span></td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+

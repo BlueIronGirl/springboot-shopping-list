@@ -1,0 +1,55 @@
+spring:
+  datasource:
+    url: "jdbc:mariadb://${APP_DB_HOST:db}:3306/${MYSQL_DATABASE:shopping-list}"
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDB103Dialect
+
+  flyway:
+    enabled: true
+    baselineOnMigrate: true
+    validateOnMigrate: true
+
+  mail:
+    username: ${GMAIL_USER}
+    password: ${GMAIL_PASSWORD}
+    host: smtp.gmail.com
+    port: 587
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+server:
+  error:
+    include-message: ${APP_ERROR_INCLUDE_MESSAGE:never}
+
+  forward-headers-strategy: native
+  servlet:
+    # see nginx.conf in UI Repository
+    context-path: /api
+
+logging:
+  level:
+    root: ${APP_LOGGING_ROOT:error}
+    de.shoppinglist: ${APP_LOGGING:warn}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,metrics"
+
+client:
+  url: "https://shopping-list.app-node.de"

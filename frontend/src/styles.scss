@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "primeicons/primeicons.css";
+body {
+  font-family: var(--font-family);
+}
+
+.p-checkbox .p-checkbox-box.p-highlight {
+  background-color: rgb(101 163 13 / var(--tw-text-opacity));
+  border-color: rgb(101 163 13 / var(--tw-text-opacity));
+  color: rgb(255, 255, 255); /* White */
+}
+
+.p-button, .p-button:enabled:hover {
+  background-color: rgb(163 230 53);
+  color: inherit;
+}
+
+.p-button.p-button-text, .p-button.p-button-text:enabled:hover {
+  background-color: inherit;
+  color: inherit;
+}

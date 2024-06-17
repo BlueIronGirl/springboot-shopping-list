@@ -1,0 +1,43 @@
+<form [formGroup]="einkaufszettelForm" class="max-w-xl m-auto" (ngSubmit)="save()">
+  <!-- Name -->
+  <div class="mt-2 mb-6">
+    <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="name">Name*</label>
+    <input id="name" class="w-full" type="text" pInputText formControlName="name"/>
+  </div>
+
+  <!-- Owners -->
+  <div class="mt-2 mb-6" *ngIf="allUsersFriends.length > 0">
+    <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="name">Besitzer</label>
+    <p-multiSelect
+      [options]="allUsersFriends"
+      [style]="{'width': '100%'}"
+      [ngStyle]="{'width': '100%'}"
+      formControlName="owners"
+      optionLabel="username"
+      placeholder="Wähle Benutzer die Besitzer sein sollen"/>
+  </div>
+
+  <!-- Shared with Users -->
+  <div class="mt-2 mb-6" *ngIf="allUsersFriends.length > 0">
+    <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="name">Personen mit Zugriff</label>
+    <p-multiSelect
+      [options]="allUsersFriends"
+      [style]="{'width': '100%'}"
+      [ngStyle]="{'width': '100%'}"
+      formControlName="sharedWith"
+      optionLabel="username"
+      placeholder="Wähle Benutzer die auch Zugriff haben sollen"/>
+  </div>
+
+  <!-- Buttons -->
+  <div class="flex md:items-center mt-2">
+    <button *ngIf="edit" type="button" (click)="delete($event)"
+            class="text-gray-600 font-bold underline rounded-lg mr-5 py-2 text-center">
+      Löschen
+    </button>
+    <button type="submit" [disabled]="einkaufszettelForm.invalid"
+            class="bg-lime-400 rounded-lg px-2 py-2 text-center">
+      Speichern
+    </button>
+  </div>
+</form>

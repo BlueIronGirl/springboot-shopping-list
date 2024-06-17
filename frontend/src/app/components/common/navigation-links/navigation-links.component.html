@@ -1,0 +1,30 @@
+<div class="sm:flex sm:space-x-4 sm:items-center sm:justify-center">
+  <a routerLink="/home"
+     routerLinkActive="bg-gray-200"
+     class="block sm:inline hover:bg-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 font-medium"
+     aria-current="page">
+    <span class="fas fa-house fa-sm"></span> Übersicht
+  </a>
+  <a routerLink="/einkaufszettel"
+     routerLinkActive="bg-gray-200"
+     class="block sm:inline hover:bg-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 font-medium"
+     aria-current="page">
+    <span class="fas fa-cart-shopping fa-sm"></span> Einkaufszettel
+  </a>
+  <a routerLink="/archiv"
+     routerLinkActive="bg-gray-200"
+     class="block sm:inline hover:bg-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 font-medium"
+     aria-current="page">
+    <span class="fas fa-archive fa-sm"></span> Archiv
+  </a>
+  <a *ngIf="hasRole(ROLE_NAME.ROLE_ADMIN)"
+     routerLink="/user"
+     routerLinkActive="bg-gray-200"
+     class="block sm:inline hover:bg-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 font-medium"
+     aria-current="page">
+    <span class="fas fa-user-tie fa-sm"></span> Userverwaltung
+  </a>
+</div>
+
+
+

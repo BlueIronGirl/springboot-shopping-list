@@ -1,0 +1,23 @@
+<div class="container">
+  <h1></h1>
+  <div *ngIf="!error">
+    <div class="text-gray-500">
+      {{ message }}
+    </div>
+    <div>
+      <a routerLink="/login" class="text-lime-600"><span
+        class="text-lime-600 text-xl"></span>Zum Login</a>
+    </div>
+  </div>
+
+  <div *ngIf="error">
+    <div class="text-gray-500">
+      {{ message }}
+    </div>
+    <div>
+      <a routerLink="/register" class="text-lime-600"><span
+        class="text-lime-600 text-xl"></span>Zur Registrierung</a>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,38 @@
+<div class="w-full">
+  <div *ngFor="let einkaufszettel of einkaufszettel"
+       class="flex-grow-1 bg-white m-5 p-3 rounded-lg shadow-lg border-2">
+    <h2 class="flex text-2xl">
+      <span class="font-bold text-lime-600">{{ einkaufszettel.name }} </span>
+      <button type="button" [routerLink]="['/artikel/new', einkaufszettel.id]"
+              pTooltip="Neuen Artikel anlegen"
+              class="fas fa-plus ml-2 text-gray-500"></button>
+      <div class="grow"></div>
+      <app-split-button [width]="'64'" *ngIf="einkaufszettel.einkaufszettelActions"
+                        [actions]="einkaufszettel.einkaufszettelActions"></app-split-button>
+    </h2>
+
+    <div class="flex" *ngFor="let artikel of einkaufszettel.artikels">
+      <p-checkbox class="mr-2 rounded-full"
+                  [(ngModel)]="artikel.gekauft"
+                  [binary]="true"
+                  (onChange)="changeArtikelGekauft(einkaufszettel, artikel)"></p-checkbox>
+
+      <span class="text-primary font-semibold text-xl text-lime-600 mr-2">{{ artikel.anzahl }}</span>
+      <span class="text-primary font-semibold text-xl cursor-pointer hover:underline"
+            pTooltip="Artikel bearbeiten"
+            [routerLink]="['/artikel', einkaufszettel.id, artikel.id]">{{ artikel.name }}</span>
+
+
+    </div>
+  </div>
+
+  <div *ngIf="einkaufszettel.length === 0" class="font-medium">
+    <div class="text-gray-500">
+      Sie haben noch keinen Einkaufszettel angelegt?
+    </div>
+    <a routerLink="/einkaufszettel" class="text-lime-600"><span
+      class="fas fa-cart-shopping text-lime-600 mr-2 text-xl"></span>Neuen Einkaufszettel anlegen</a>
+  </div>
+</div>
+
+

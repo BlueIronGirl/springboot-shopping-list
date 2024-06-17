@@ -1,0 +1,148 @@
+<div class="card">
+  <p-table class="p-0"
+           dataKey="id"
+           editMode="row"
+           [value]="allUsers"
+           [paginator]="true"
+           [rows]="10"
+           [rowsPerPageOptions]="[5, 10, 15]">
+    <!-- Header -->
+    <ng-template pTemplate="header">
+      <tr>
+        <th pResizableColumn pSortableColumn="username">
+          Username
+          <p-sortIcon field="username"/>
+        </th>
+        <th pResizableColumn pSortableColumn="name">
+          Name
+          <p-sortIcon field="name"/>
+        </th>
+        <th pResizableColumn pSortableColumn="email">
+          E-Mail
+          <p-sortIcon field="email"/>
+        </th>
+        <th pResizableColumn pSortableColumn="roles">
+          Rollen
+          <p-sortIcon field="roles"/>
+        </th>
+        <th pResizableColumn pSortableColumn="createdAt">
+          Erstellt am
+          <p-sortIcon field="createdAt"/>
+        </th>
+        <th pResizableColumn pSortableColumn="lastLoggedIn">
+          Zuletzt eingeloggt am
+          <p-sortIcon field="lastLoggedIn"/>
+        </th>
+        <th style="width:10%"></th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-user let-editing="editing" let-rowIndex="rowIndex">
+      <tr [pEditableRow]="user">
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                pInputText
+                type="text"
+                [style]="{'width': '100%'}"
+                [ngStyle]="{'width': '100%'}"
+                [(ngModel)]="user.username"/>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user.username }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                pInputText
+                type="text"
+                [style]="{'width': '100%'}"
+                [ngStyle]="{'width': '100%'}"
+                [(ngModel)]="user.name"/>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user.name }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                pInputText
+                type="text"
+                [style]="{'width': '100%'}"
+                [ngStyle]="{'width': '100%'}"
+                [(ngModel)]="user.email"/>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user.email }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <p-multiSelect
+                [options]="allRoles"
+                [style]="{'width': '100%'}"
+                [ngStyle]="{'width': '100%'}"
+                [(ngModel)]="user.roles"
+                optionLabel="name"
+                placeholder="Wähle alle Rollen des Benutzers"/>
+            </ng-template>
+            <ng-template pTemplate="output">
+              <div *ngFor="let role of user.roles">{{ role.name }}</div>
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          {{ user.createdAt | date:'dd.MM.yyyy HH:mm' }}
+        </td>
+        <td>
+          {{ user.lastLoggedIn | date:'dd.MM.yyyy HH:mm' }}
+        </td>
+        <td>
+          <div class="flex align-items-center justify-content-center gap-2">
+            <button
+              *ngIf="!editing"
+              pButton
+              type="button"
+              pInitEditableRow
+              class="fas fa-edit bg-lime-400 text-white rounded-lg px-2 py-2 text-center">
+            </button>
+            <button
+              *ngIf="!editing && !isAdmin(user)"
+              pButton
+              type="button"
+              (click)="deleteUser(user)"
+              class="fas fa-trash bg-lime-400 text-white rounded-lg px-2 py-2 text-center">
+            </button>
+            <button
+              *ngIf="editing"
+              pButton
+              type="button"
+              pSaveEditableRow
+              (click)="onRowEditSave(user)"
+              class="fas fa-check bg-lime-400 text-white rounded-lg px-2 py-2 text-center">
+            </button>
+            <button
+              *ngIf="editing"
+              pButton
+              type="button"
+              pCancelEditableRow
+              (click)="onRowEditCancel(rowIndex)"
+              class="fas fa-xmark bg-lime-400 text-white rounded-lg px-2 py-2 text-center">
+            </button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+
